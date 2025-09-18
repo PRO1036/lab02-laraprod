@@ -23,9 +23,8 @@ Combien y a-t-il d’observations dans le jeu de données ?
 En regardant les données, vous voyez que certaines cellules ont comme
 valeurs NA. Que cela signifie-t-il ?
 
-- N/A signifie ‘Non Applicable’. Cela veut surement dire que les
-  informations en question manquent et ne peuvent donc pas être ajoutées
-  au jeu de données.
+- NA signifie ‘Non Available’ donc que l’information nécessaire
+  n’apparaît pas dans le jeu de données.
 
 ## Chargement des packages et des données
 
@@ -50,32 +49,69 @@ plastic_waste <- plastic_waste %>%
 ### Exercise 1
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap)) +
+  geom_histogram(binwidth = 0.4) +
+  facet_grid(~continent) +
+  labs (title = "Distribution des quantité de déchets par habitant sur divers continents", x = "quantité de déchets plastiques par habitant en kg/jour")
 ```
+
+![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- -->
+
+Que pouvez-vous dire de la comparaison des continents, en terme de
+déchets plastiques ?
+
+- L’Europe et l’Amérique du Nord semblent être les continents qui
+  polluent le plus en grande quantité. L’Océanie et l’Amérique du Sud
+  polluent peu alors que les habitants d’Asie et d’Afrique sont très
+  nombreux à polluer très peu,
 
 ### Exercise 2
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, fill = continent)) +
+  geom_density(alpha = 0.75, colour = NA)
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
+
+Décrivez pourquoi le reglage de la couleur (color et fill) et le réglage
+de la transparence (alpha) ne se trouvent pas au même endroit ? L’un
+étant réglé dans aes et l’autre dans geom_density()
+
+- Cela peut s’expliquer par le fait que les fonctions geom\_ servent à
+  fixer des paramètres constants alors que aes dépend de la variable. On
+  attribue une couleur (remplie) différente à chaque continent alors que
+  le paramètre alpha est identique peu importe le continent.
 
 ### Exercise 3
 
 Boxplot:
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = continent, y = plastic_waste_per_cap)) +
+  geom_boxplot()
 ```
+
+![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
 
 Violin plot:
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = continent, y = plastic_waste_per_cap)) +
+  geom_violin()
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
+
+Qu’est ce que les violin plots permettent de voir sur les données que
+les boxplot ne permettent pas ?
+
+- Les boxplots sont construits à partir de points statistiques tels que
+  la moyenne, les quartiles, etc… Ils ne montrent donc pas la
+  répartition complète des données mais offrent plutôt une
+  représentation synthétique. A l’inverse, les violins permettent
+  d’illustrer la distribution des données de manière beaucoup plus
+  complète.
 
 ### Exercise 4
 
