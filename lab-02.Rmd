@@ -45,7 +45,7 @@ plastic_waste <- plastic_waste %>%
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap)) +
   geom_histogram(binwidth = 0.4) +
   facet_grid(~continent) +
-  labs (title = "Distribution des quantité de déchets par habitant sur divers continents", x = "quantité de déchets plastiques par habitant en kg/jour")
+  labs (title = "Distribution des quantités de déchets par habitant sur divers continents", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Nombre de pays")
 
 ```
 
@@ -56,8 +56,11 @@ Que pouvez-vous dire de la comparaison des continents, en terme de déchets plas
 ### Exercise 2
 
 ```{r plastic-waste-density}
+
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, fill = continent)) +
-  geom_density(alpha = 0.75, colour = NA)
+  geom_density(alpha = 0.75, colour = NA) +
+  labs (title = "Graphe illustrant la quantité de déchets produits selon le continent du pays", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Densité", fill = "Continents")
+
 ```
 
 Décrivez pourquoi le reglage de la couleur (color et fill) et le réglage de la transparence (alpha) ne se trouvent pas au même endroit ? L’un étant réglé dans aes et l’autre dans geom_density()
@@ -71,7 +74,8 @@ Boxplot:
 ```{r plastic-waste-boxplot}
 
 ggplot(plastic_waste, aes(x = continent, y = plastic_waste_per_cap)) +
-  geom_boxplot()
+  geom_boxplot() + 
+  labs(title = "Quantité de déchets plastiques produits en fonction du continent", x = "Continent", y = "Quantité de déchets plastiques par habitant en kg/jour")
 
 ```
 
@@ -90,23 +94,39 @@ Qu’est ce que les violin plots permettent de voir sur les données que les box
 
 
 ```{r plastic-waste-mismanaged}
-# insert code here
+
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
+  geom_point() +
+  labs(title = "Quantité de déchets non gérés en fonction des déchets produits par habitant", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Quantité de déchets plastiques non gérés par habitant en kg/jour", colour = "Continents")
+
 ```
 
-Réponse à la question...
+Voyez-vous une tendance ?
+
+- Les pays d'Afrique et d'Asie, qui constituent généralement des pays pauvres, sont ceux qui ont le plus de déchets non gérés, ainsi que l'Océanie. Cependant, les pays d'Afrique ont tendance à polluer beaucoup moins que les pays d'autres continents. 
 
 ### Exercise 5
 
 
 ```{r plastic-waste-population-total}
-# insert code here
+
+ggplot(plastic_waste, aes(y = plastic_waste_per_cap, x = total_pop)) +
+  geom_point() +
+  labs (title = "Quantité de déchets plastiques non gérés en fonction de la population totale", x = "Population totale selon Gapminder", y = "Quantité de déchets plastiques non gérés par habitant en kg/jour")
+
 ```
 
 ```{r plastic-waste-population-coastal}
-# insert code here
+
+ggplot(plastic_waste, aes(x = coastal_pop, y = plastic_waste_per_cap)) +
+  geom_point() +
+  labs(title = "Quantité de déchets plastiques non gérés en fonction de la population côtière", x = "Nombres de personnes vivant sur des côtes", y = "Quantité de déchets plastiques non gérés par habitant en kg/jour")
+
 ```
 
-Réponse à la question...
+Est-ce qu’il semble y avoir une relation plus forte pour l’une des paires de variables ?
+
+- Il ne semble pas y avoir une différence significative entre la relation du premier graphe et du second graphe. 
 
 ## Conclusion
 

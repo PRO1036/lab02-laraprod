@@ -52,7 +52,7 @@ plastic_waste <- plastic_waste %>%
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap)) +
   geom_histogram(binwidth = 0.4) +
   facet_grid(~continent) +
-  labs (title = "Distribution des quantité de déchets par habitant sur divers continents", x = "quantité de déchets plastiques par habitant en kg/jour")
+  labs (title = "Distribution des quantités de déchets par habitant sur divers continents", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Nombre de pays")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- -->
@@ -69,7 +69,8 @@ déchets plastiques ?
 
 ``` r
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, fill = continent)) +
-  geom_density(alpha = 0.75, colour = NA)
+  geom_density(alpha = 0.75, colour = NA) +
+  labs (title = "Graphe illustrant la quantité de déchets produits selon le continent du pays", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Densité", fill = "Continents")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
@@ -89,7 +90,8 @@ Boxplot:
 
 ``` r
 ggplot(plastic_waste, aes(x = continent, y = plastic_waste_per_cap)) +
-  geom_boxplot()
+  geom_boxplot() + 
+  labs(title = "Quantité de déchets plastiques produits en fonction du continent", x = "Continent", y = "Quantité de déchets plastiques par habitant en kg/jour")
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
@@ -116,22 +118,46 @@ les boxplot ne permettent pas ?
 ### Exercise 4
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
+  geom_point() +
+  labs(title = "Quantité de déchets non gérés en fonction des déchets produits par habitant", x = "Quantité de déchets plastiques par habitant en kg/jour", y = "Quantité de déchets plastiques non gérés par habitant en kg/jour", colour = "Continents")
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
+
+Voyez-vous une tendance ?
+
+- Les pays d’Afrique et d’Asie, qui constituent généralement des pays
+  pauvres, sont ceux qui ont le plus de déchets non gérés, ainsi que
+  l’Océanie. Cependant, les pays d’Afrique ont tendance à polluer
+  beaucoup moins que les pays d’autres continents.
 
 ### Exercise 5
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(y = plastic_waste_per_cap, x = total_pop)) +
+  geom_point() +
+  labs (title = "Quantité de déchets plastiques non gérés en fonction de la population totale", x = "Population totale selon Gapminder", y = "Quantité de déchets plastiques non gérés par habitant en kg/jour")
 ```
+
+    ## Warning: Removed 10 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](lab-02_files/figure-gfm/plastic-waste-population-total-1.png)<!-- -->
 
 ``` r
-# insert code here
+ggplot(plastic_waste, aes(x = coastal_pop, y = plastic_waste_per_cap)) +
+  geom_point() +
+  labs(title = "Quantité de déchets plastiques non gérés en fonction de la population côtière", x = "Nombres de personnes vivant sur des côtes", y = "Quantité de déchets plastiques non gérés par habitant en kg/jour")
 ```
 
-Réponse à la question…
+![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
+
+Est-ce qu’il semble y avoir une relation plus forte pour l’une des
+paires de variables ?
+
+- Il ne semble pas y avoir une différence significative entre la
+  relation du premier graphe et du second graphe.
 
 ## Conclusion
 
